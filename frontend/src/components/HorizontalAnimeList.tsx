@@ -17,12 +17,11 @@ interface Props {
 const HorizontalAnimeList: React.FC<Props> = ({ title, data, onSeeMore }) => {
   return (
     <Box sx={{ mb: 4 }}>
-      {/* Section Header */}
       <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 1 }}>
         <Typography
           variant="h6"
           sx={{
-            fontFamily: "'Bangers', cursive", // anime-style font
+            fontFamily: "'Bangers', cursive",
             color: "primary.main"
           }}
         >
@@ -33,21 +32,9 @@ const HorizontalAnimeList: React.FC<Props> = ({ title, data, onSeeMore }) => {
         </Button>
       </Box>
 
-      {/* Horizontal Scroll */}
-      <Box
-        sx={{
-          display: "flex",
-          overflowX: "auto",
-          gap: 2,
-          pb: 1,
-          scrollbarWidth: "none",
-          "&::-webkit-scrollbar": { display: "none" }
-        }}
-      >
+      <Box sx={{ display: "flex", overflowX: "auto", gap: 2, pb: 1 }}>
         {data.map((anime) => (
-          <Box key={anime.id} sx={{ flexShrink: 0 }}>
-            <AnimeCard id={anime.id} title={anime.title} imageUrl={anime.imageUrl} />
-          </Box>
+          <AnimeCard key={anime.id} id={anime.id} title={anime.title} imageUrl={anime.imageUrl} />
         ))}
       </Box>
     </Box>

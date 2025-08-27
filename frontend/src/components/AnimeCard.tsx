@@ -1,5 +1,6 @@
 import React from "react";
-import { Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { Card, CardMedia, CardContent, Typography } from "@mui/material";
+import { Link, useLocation } from "react-router-dom";
 
 interface AnimeCardProps {
   id: number;
@@ -8,40 +9,32 @@ interface AnimeCardProps {
 }
 
 const AnimeCard: React.FC<AnimeCardProps> = ({ id, title, imageUrl }) => {
+  const location = useLocation();
+
   return (
     <Card
-      key={id}
+      component={Link}
+      to={`/anime/${id}`}
+      state={{ backgroundLocation: location }}
       sx={{
-        width: 140,
-        margin: 0.5,
+        minWidth: 120,
+        maxWidth: 120,
+        textDecoration: "none",
+        backgroundColor: "background.paper",
+        borderRadius: 2,
         boxShadow: 2,
-        borderRadius: "8px",
-        cursor: "pointer",
-        "&:hover": {
-          transform: "scale(1.05)",
-          transition: "0.2s",
-        },
+        flexShrink: 0,
+        color: "inherit"
       }}
     >
       <CardMedia
         component="img"
-        height="140"
         image={imageUrl}
         alt={title}
-        sx={{ objectFit: "cover", borderRadius: "4px" }}
+        sx={{ height: 150, objectFit: "cover" }}
       />
-      <CardContent sx={{ padding: "4px" }}>
-        <Typography
-          variant="body2"
-          sx={{
-            fontSize: "0.75rem",
-            fontWeight: 500,
-            textAlign: "center",
-            whiteSpace: "nowrap",
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-          }}
-        >
+      <CardContent sx={{ p: 1 }}>
+        <Typography variant="body2" noWrap>
           {title}
         </Typography>
       </CardContent>
