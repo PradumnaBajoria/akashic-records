@@ -1,5 +1,6 @@
 import React from "react";
-import { Box, Typography, Card, CardMedia, CardContent, Button } from "@mui/material";
+import { Box, Typography, Button } from "@mui/material";
+import AnimeCard from "./AnimeCard";
 
 interface AnimeItem {
   id: number;
@@ -33,31 +34,20 @@ const HorizontalAnimeList: React.FC<Props> = ({ title, data, onSeeMore }) => {
       </Box>
 
       {/* Horizontal Scroll */}
-      <Box sx={{ display: "flex", overflowX: "auto", gap: 2, pb: 1 }}>
+      <Box
+        sx={{
+          display: "flex",
+          overflowX: "auto",
+          gap: 2,
+          pb: 1,
+          scrollbarWidth: "none",
+          "&::-webkit-scrollbar": { display: "none" }
+        }}
+      >
         {data.map((anime) => (
-          <Card
-            key={anime.id}
-            sx={{
-              minWidth: 140,
-              maxWidth: 140,
-              backgroundColor: "background.paper",
-              borderRadius: 2,
-              boxShadow: 3,
-              flexShrink: 0
-            }}
-          >
-            <CardMedia
-              component="img"
-              image={anime.imageUrl}
-              alt={anime.title}
-              sx={{ height: 190, objectFit: "cover", borderTopLeftRadius: 8, borderTopRightRadius: 8 }}
-            />
-            <CardContent sx={{ p: 1 }}>
-              <Typography variant="body2" noWrap>
-                {anime.title}
-              </Typography>
-            </CardContent>
-          </Card>
+          <Box key={anime.id} sx={{ flexShrink: 0 }}>
+            <AnimeCard id={anime.id} title={anime.title} imageUrl={anime.imageUrl} />
+          </Box>
         ))}
       </Box>
     </Box>
